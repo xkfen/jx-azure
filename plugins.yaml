@@ -1,0 +1,17 @@
+approve:
+- lgtm_acts_as_approve: false
+  repos:
+  - gitcpu-io/jx-azure
+  require_self_approval: true
+config_updater:
+  gzip: false
+  maps:
+    config.yaml:
+      name: config
+    plugins.yaml:
+      name: plugins  
+plugins:
+  gitcpu-io/jx-azure:
+  - config-updater
+  - approve
+  - lgtm 
