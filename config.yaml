@@ -1,0 +1,8 @@
+pod_namespace: jx
+prowjob_namespace: jx
+tide:
+  queries:
+  - labels:
+    - approved
+    repos:
+    - gitcpu-io/jx-azure
