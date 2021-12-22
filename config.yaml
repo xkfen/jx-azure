@@ -1,8 +1,23 @@
 pod_namespace: jx
 prowjob_namespace: jx
+postsubmits:
+  gitcpu-io/jx-azure:
+  - agent: tekton
+    branches:
+    - main
+    context: ""
+    name: release
+presubmits:
+  gitcpu-io/jx-azure:
+  - agent: tekton
+    always_run: true
+    context: serverless-jenkins
+    name: serverless-jenkins
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
 tide:
   queries:
-  - labels:
-    - approved
-    repos:
+  - repos:
     - gitcpu-io/jx-azure
+    labels:
+    - approved

@@ -14,4 +14,17 @@ plugins:
   gitcpu-io/jx-azure:
   - config-updater
   - approve
-  - lgtm 
+  - assign
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - pony
+  - override
+welcome:
+- message_template: Welcome
