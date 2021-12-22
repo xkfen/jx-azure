@@ -1,12 +1,29 @@
-pod_namespace: jx
-prowjob_namespace: jx
+pod_namespace: lighthouse
+prowjob_namespace: lighthouse
 postsubmits:
   gitcpu-io/jx-azure:
-  - agent: tekton
+  - agent: tekton-pipeline
     branches:
-    - main
-    context: ""
-    name: release
+      - main
+    context: jx-azure
+    name: jx-azure
+    pipeline_run_spec:
+      serviceAccountName: app-builder
+      pipelineRef:
+        name: jx-azure-pipeline
+      workspaces:
+        - name: shared-workspace
+          persistentvolumeclaim:
+            claimName: buildpacks-source-pvc
+      resources:
+        - name: build-image
+          resourceRef:
+            name: buildpacks-app-image
+      podTemplate:
+        volumes:
+          - name: buildpacks-cache
+            persistentVolumeClaim:
+              claimName: buildpacks-cache-pvc
 presubmits:
   gitcpu-io/jx-azure:
   - agent: tekton

@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-builder
+  namespace: lighthouse
+secrets:
+  - name: github
+  - name: dockerhub
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: buildpacks-app-image
+  namespace: lighthouse
+spec:
+  type: image
+  params:
+    - name: url
+      value: rubinus/jx-azure:latest  ##这里需要替换
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: buildpacks-source-pvc
+  namespace: lighthouse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: buildpacks-cache-pvc
+  namespace: lighthouse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: jx-azure-pipeline
+  namespace: lighthouse
+spec:
+  workspaces:
+    - name: shared-workspace
+  resources:
+    - name: build-image
+      type: image
+  tasks:
+    - name: fetch-repository
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: https://github.com/gitcpu-io/jx-azure ##这里需要替换
+        - name: deleteExisting
+          value: "true"
+    - name: buildpacks
+      taskRef:
+        name: buildpacks
+      runAfter:
+        - fetch-repository
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: BUILDER_IMAGE
+          value: paketobuildpacks/builder:tiny
+        - name: CACHE
+          value: buildpacks-cache
+      resources:
+        outputs:
+          - name: image
+            resource: build-image
