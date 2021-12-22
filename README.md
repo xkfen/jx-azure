@@ -14,11 +14,3 @@ git commit -a -m "chore: Jenkins X changes"
 ```
 
 
-test jx
-11
-22
-33
-44
-55
-222
-333
