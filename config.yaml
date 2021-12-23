@@ -1,5 +1,5 @@
-pod_namespace: lighthouse
-prowjob_namespace: lighthouse
+pod_namespace: jx
+prowjob_namespace: jx
 postsubmits:
   gitcpu-io/jx-azure:
   - agent: tekton-pipeline
@@ -37,4 +37,5 @@ tide:
   - repos:
     - gitcpu-io/jx-azure
     labels:
+    - lgtm
     - approved
