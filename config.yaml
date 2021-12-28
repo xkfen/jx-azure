@@ -36,5 +36,4 @@ tide:
   - repos:
     - gitcpu-io/jx-azure
     labels:
-    - lgtm
     - approved

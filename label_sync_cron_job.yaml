@@ -47,7 +47,7 @@ spec:
           volumes:
           - name: oauth
             secret:
-              secretName: oauth-token
+              secretName: lighthouse-oauth-token
           - name: config
             configMap:
               name: label-config
