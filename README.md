@@ -1,25 +1,5 @@
-# Jenkins X 3.x GitOps Repository for AKS and Azure Key Vault
+# Jenkins X 3.x GitOps Repository for AKS and Azure
 
-This git repository installs Jenkins X with Azure Key Vault.
+## Add color for label sync
 
-## Creating/upgrading cloud resources
-
-Modify the `jx-requirements.yml` file
-
-Now git commit and push any changes...
-
-```bash 
-git add *
-git commit -a -m "chore: Jenkins X changes"
-```
-
-
-test jx
-11
-22
-33
-44
-55
-222
-333
 jjjjjj by xkfen

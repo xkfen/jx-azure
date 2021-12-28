@@ -17,6 +17,7 @@ triggers:
     elide_skipped_contexts: false
 plugins:
   gitcpu-io/jx-azure:
+  - welcome
   - config-updater
   - approve
   - assign
@@ -27,9 +28,18 @@ plugins:
   - size
   - trigger
   - wip
-  - heart
   - cat
-  - pony
+  - yuks
+  - label
+  - milestone
+  - milestonestatus
+  - owners-label
+  - shrug
+  - sigmention
+  - skip
+  - stage
   - override
+  - branchcleaner
+  - blockade
 welcome:
 - message_template: Welcome
