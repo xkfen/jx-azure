@@ -26,7 +26,6 @@ postsubmits:
               claimName: buildpacks-cache-pvc
 presubmits:
   gitcpu-io/jx-azure:
-  - agent: tekton
     always_run: true
     context: serverless-jenkins
     name: serverless-jenkins
